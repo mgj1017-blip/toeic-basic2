@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Basic 2 (2026-2학기) 과목 소개</title>
+<style>
+  :root{
+    --bg: #FFF8F0;
+    --card: #FFFFFF;
+    --ink: #2B2D3A;
+    --ink-soft: #5B5F6E;
+    --teal: #1F7A6C;
+    --teal-dark: #145A50;
+    --coral: #FF6B4A;
+    --cream-border: #F0E4D4;
+    --focus: #145A50;
+
+    /* Okabe-Ito colorblind-safe palette for evaluation chart */
+    --eval-attend: #0072B2;   /* 출석 20% - white text, contrast 5.18:1 */
+    --eval-daily:  #E69F00;   /* 평소점수 10% - dark text, contrast 7.73:1 */
+    --eval-mid:    #009E73;   /* 중간고사 30% - dark text, contrast 5.08:1 */
+    --eval-final:  #B85400;   /* 기말고사 40% - white text, contrast 4.88:1 */
+    --eval-dark-text: #1A1A1A;
+  }
+
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    font-family: "Apple SD Gothic Neo","Malgun Gothic","Segoe UI",sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  a{ color: var(--teal-dark); }
+  img, svg{ max-width:100%; }
+
+  .sr-only{
+    position:absolute;
+    width:1px; height:1px;
+    padding:0; margin:-1px;
+    overflow:hidden;
+    clip:rect(0,0,0,0);
+    white-space:nowrap;
+    border:0;
+  }
+
+  a:focus-visible, button:focus-visible{
+    outline: 3px solid var(--focus);
+    outline-offset: 2px;
+  }
+
+  /* ---------- Nav ---------- */
+  header.topnav{
+    position: sticky; top:0; z-index: 50;
+    background: rgba(255,248,240,0.95);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--cream-border);
+  }
+  .nav-inner{
+    max-width: 980px; margin:0 auto;
+    display:flex; align-items:center; justify-content:space-between;
+    padding: 12px 20px;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand{
+    font-weight:800; color: var(--teal-dark);
+    font-size: 1.05rem;
+    white-space: nowrap;
+  }
+  nav.links{ display:flex; gap: 6px; flex-wrap: wrap; }
+  nav.links a{
+    text-decoration:none;
+    color: var(--ink);
+    font-size: 0.92rem;
+    font-weight:600;
+    padding: 8px 12px;
+    border-radius: 999px;
+  }
+  nav.links a:hover, nav.links a:focus-visible{
+    background: var(--teal);
+    color: #fff;
+  }
+
+  /* ---------- Hero ---------- */
+  .hero{
+    max-width: 980px; margin: 0 auto;
+    padding: 56px 20px 40px;
+    text-align:center;
+  }
+  .eyebrow{
+    display:inline-block;
+    background: #E9F5F2;
+    color: var(--teal-dark);
+    font-weight:700;
+    font-size: 0.85rem;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+  .hero h1{
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin: 0 0 8px;
+    color: var(--ink);
+  }
+  .hero .semester{
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    font-weight:600;
+    margin-bottom: 18px;
+  }
+  .hero .welcome{
+    max-width: 560px; margin: 0 auto;
+    color: var(--ink-soft);
+    font-size: 1.02rem;
+  }
+
+  /* ---------- Sections ---------- */
+  main{ max-width: 980px; margin: 0 auto; padding: 0 20px 80px; }
+  section{ margin-top: 64px; }
+  section:first-of-type{ margin-top: 8px; }
+
+  .section-head{
+    display:flex; align-items:baseline; gap: 12px;
+    margin-bottom: 22px;
+    flex-wrap: wrap;
+  }
+  .section-num{
+    font-weight:800; color:#fff; background: var(--coral);
+    border-radius: 50%;
+    width: 34px; height:34px;
+    display:flex; align-items:center; justify-content:center;
+    font-size: 0.95rem;
+    flex-shrink:0;
+  }
+  .section-head h2{
+    margin:0; font-size: 1.5rem; color: var(--ink);
+  }
+
+  .card{
+    background: var(--card);
+    border: 1px solid var(--cream-border);
+    border-radius: 18px;
+    padding: 24px;
+    box-shadow: 0 4px 14px rgba(43,45,58,0.05);
+  }
+  .card + .card{ margin-top: 18px; }
+
+  /* ---------- Goals ---------- */
+  .goal-box{
+    text-align:center;
+    padding: 40px 24px;
+  }
+  .goal-box .label{
+    font-weight:700; color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 10px;
+  }
+  .goal-box .score{
+    font-size: clamp(2.2rem, 6vw, 3.2rem);
+    font-weight: 800;
+    color: var(--teal-dark);
+    letter-spacing: -0.02em;
+  }
+  .goal-box .score small{
+    font-size: 0.5em;
+    font-weight:700;
+    color: var(--coral);
+    margin-left: 6px;
+  }
+  .goal-box .cheer{
+    margin-top: 14px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- Table (weekly schedule) ---------- */
+  .table-wrap{ overflow-x:auto; }
+  table.schedule{
+    width:100%;
+    border-collapse: collapse;
+    min-width: 480px;
+  }
+  table.schedule caption{
+    text-align:left;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin-bottom: 10px;
+  }
+  table.schedule th, table.schedule td{
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--cream-border);
+    text-align:left;
+    font-size: 0.95rem;
+  }
+  table.schedule thead th{
+    background: #F5EEE2;
+    color: var(--ink);
+    font-weight:700;
+    position: sticky; top: 0;
+  }
+  table.schedule tbody tr:hover{ background: #FFFBF2; }
+  table.schedule tr.exam td{
+    background: #FFF1EC;
+    font-weight:700;
+    color: var(--coral);
+  }
+  table.schedule td.week{ font-weight:700; white-space:nowrap; }
+  .footnote{
+    margin-top: 10px;
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+  }
+
+  .makeup-list{
+    list-style:none; margin: 14px 0 0; padding:0;
+    display:grid; gap: 10px;
+  }
+  .makeup-list li{
+    display:flex; align-items:center; justify-content:space-between;
+    background: #FFFBF2;
+    border: 1px dashed var(--cream-border);
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-size: 0.95rem;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .pill{
+    background: #F5EEE2;
+    color: var(--ink-soft);
+    font-weight:700;
+    font-size: 0.82rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+
+  /* ---------- Textbooks ---------- */
+  .book-grid{
+    display:grid; gap: 16px;
+    grid-template-columns: repeat(auto-fit, minmax(240px,1fr));
+  }
+  .book-card{
+    border: 1px solid var(--cream-border);
+    border-radius: 14px;
+    padding: 18px;
+    background: #FFFDFA;
+  }
+  .book-card .tag{
+    display:inline-block;
+    font-size: 0.78rem;
+    font-weight:700;
+    color: var(--teal-dark);
+    background:#E9F5F2;
+    padding:3px 10px;
+    border-radius: 999px;
+    margin-bottom: 8px;
+  }
+  .book-card h3{ margin: 4px 0 4px; font-size: 1.05rem; }
+  .book-card p{ margin:0; color: var(--ink-soft); font-size: 0.9rem; }
+
+  h3.subhead{
+    font-size: 1.15rem;
+    margin: 30px 0 14px;
+    color: var(--ink);
+    border-left: 4px solid var(--coral);
+    padding-left: 10px;
+  }
+  section h3.subhead:first-of-type, .card > h3.subhead:first-child{ margin-top: 0; }
+
+  /* ---------- Evaluation chart ---------- */
+  .eval-chart{
+    display:flex;
+    width:100%;
+    height: 52px;
+    border-radius: 12px;
+    overflow:hidden;
+    margin-top: 8px;
+    box-shadow: inset 0 0 0 1px var(--cream-border);
+  }
+  .eval-seg{
+    display:flex; align-items:center; justify-content:center;
+    font-weight:800;
+    font-size: 0.92rem;
+  }
+  .eval-legend{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(190px,1fr));
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .eval-legend .item{
+    display:flex; align-items:center; gap: 10px;
+    font-size: 0.92rem;
+  }
+  .swatch{
+    width: 16px; height:16px;
+    border-radius: 4px;
+    flex-shrink:0;
+    border: 1px solid rgba(0,0,0,0.15);
+  }
+  .eval-legend .item b{ margin-left:auto; }
+
+  .eval-detail-grid{
+    display:grid; gap: 14px;
+    grid-template-columns: repeat(auto-fit, minmax(260px,1fr));
+    margin-top: 22px;
+  }
+  .eval-detail{
+    border-radius: 14px;
+    padding: 16px 18px;
+    border: 1px solid var(--cream-border);
+    background: #FFFDFA;
+  }
+  .eval-detail .head{
+    display:flex; align-items:center; gap: 8px;
+    font-weight:800; margin-bottom: 8px;
+  }
+  .eval-detail .head .dot{ width:12px; height:12px; border-radius:50%; }
+  .eval-detail ul{ margin: 0; padding-left: 18px; font-size: 0.9rem; color: var(--ink-soft); }
+  .eval-detail ul li{ margin-bottom: 4px; }
+
+  table.grade{
+    width:100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    font-size: 0.9rem;
+  }
+  table.grade th, table.grade td{
+    border: 1px solid var(--cream-border);
+    padding: 8px;
+    text-align:center;
+  }
+  table.grade thead th{ background:#F5EEE2; }
+
+  .note-box{
+    background:#FFF7EA;
+    border: 1px solid #F0DDB0;
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    margin-top: 16px;
+  }
+  .note-box strong{ color: var(--ink); }
+
+  /* ---------- Word quiz list ---------- */
+  ol.quiz-steps, ul.quiz-steps{
+    margin: 0; padding-left: 20px;
+    display:grid; gap: 8px;
+  }
+
+  /* ---------- Professor ---------- */
+  .prof-card{
+    display:grid;
+    grid-template-columns: 160px 1fr;
+    gap: 28px;
+    align-items:flex-start;
+  }
+  @media (max-width: 600px){
+    .prof-card{ grid-template-columns: 1fr; text-align:center; }
+    .prof-card .avatar-wrap{ margin: 0 auto; }
+  }
+  .avatar-wrap{
+    width: 140px; height: 140px;
+    border-radius: 50%;
+    overflow:hidden;
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    display:flex; align-items:center; justify-content:center;
+    flex-shrink:0;
+    box-shadow: 0 6px 18px rgba(31,122,108,0.25);
+  }
+  .avatar-wrap img{
+    width:100%; height:100%; object-fit: cover;
+  }
+  .avatar-initial{
+    color:#fff;
+    font-size: 3rem;
+    font-weight: 800;
+    width:100%; height:100%;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .prof-name{ font-size:1.4rem; font-weight:800; margin:0 0 2px; }
+  .prof-role{ color: var(--ink-soft); margin:0 0 14px; font-size:0.95rem; }
+  .prof-motto{
+    display:inline-block;
+    font-style: italic;
+    color: var(--teal-dark);
+    background:#E9F5F2;
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size:0.88rem;
+    margin-bottom: 18px;
+  }
+  .prof-grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+    gap: 18px;
+    margin-top: 6px;
+  }
+  .prof-field h4{
+    margin:0 0 6px;
+    font-size:0.82rem;
+    letter-spacing:0.02em;
+    color: var(--ink-soft);
+    text-transform: uppercase;
+  }
+  .prof-field p, .prof-field ul{
+    margin:0; font-size:0.95rem;
+  }
+  .prof-field ul{ padding-left: 18px; }
+  .subject-tags{ display:flex; flex-wrap:wrap; gap:6px; }
+  .subject-tags span{
+    background:#F5EEE2;
+    border-radius: 999px;
+    padding: 3px 10px;
+    font-size: 0.82rem;
+  }
+
+  footer{
+    text-align:center;
+    padding: 30px 20px 50px;
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+</style>
+</head>
+<body>
+
+<header class="topnav">
+  <div class="nav-inner">
+    <div class="brand">TOEIC Basic 2</div>
+    <nav class="links" aria-label="섹션 바로가기">
+      <a href="#goals">교육목표</a>
+      <a href="#schedule">강의계획</a>
+      <a href="#textbook-eval">교재·평가</a>
+      <a href="#professor">교수님 소개</a>
+    </nav>
+  </div>
+</header>
+
+<div class="hero">
+  <span class="eyebrow">연성대학교 항공서비스과</span>
+  <h1>TOEIC Basic 2</h1>
+  <p class="semester">2026학년도 2학기</p>
+  <p class="welcome">환영합니다! 이번 학기도 목표를 향해 차근차근, 함께 준비해봐요.</p>
+</div>
+
+<main>
+
+  <!-- 1. 교육목표 -->
+  <section id="goals" aria-labelledby="goals-heading">
+    <div class="section-head">
+      <span class="section-num" aria-hidden="true">1</span>
+      <h2 id="goals-heading">교육목표 및 강의 개요</h2>
+    </div>
+    <div class="card goal-box">
+      <div class="label">목표 점수</div>
+      <div class="score">550<span aria-hidden="true">~</span>600<small>점 이상</small></div>
+      <p class="cheer">이번 학기 목표를 향해 함께 파이팅해봅시다!</p>
+    </div>
+  </section>
+
+  <!-- 2. 주차별 강의계획 -->
+  <section id="schedule" aria-labelledby="schedule-heading">
+    <div class="section-head">
+      <span class="section-num" aria-hidden="true">2</span>
+      <h2 id="schedule-heading">주차별 강의계획</h2>
+    </div>
+    <div class="card">
+      <div class="table-wrap">
+        <table class="schedule">
+          <caption>15주 전체 강의계획 (8주차 중간고사, 15주차 기말고사)</caption>
+          <thead>
+            <tr>
+              <th scope="col">주차</th>
+              <th scope="col">LC</th>
+              <th scope="col">RC</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td class="week">1주</td><td>오리엔테이션</td><td>Unit 7</td></tr>
+            <tr><td class="week">2주</td><td>Unit 7 / Unit 9</td><td>Unit 7 / Unit 12</td></tr>
+            <tr><td class="week">3주</td><td>Unit 7 / Unit 9</td><td>Unit 7 / Unit 12</td></tr>
+            <tr><td class="week">4주</td><td>Unit 8 / Unit 9</td><td>Unit 8 / Unit 12</td></tr>
+            <tr><td class="week">5주</td><td>Unit 8 / Unit 10</td><td>Unit 8 / Unit 12</td></tr>
+            <tr><td class="week">6주</td><td>Unit 10</td><td>Unit 8 / Unit 13</td></tr>
+            <tr><td class="week">7주</td><td>Unit 11</td><td>Unit 9 / Unit 13</td></tr>
+            <tr class="exam"><td class="week">8주</td><td colspan="2">중간고사 (필기시험)</td></tr>
+            <tr><td class="week">9주</td><td>Unit 11</td><td>Unit 9 / Unit 13</td></tr>
+            <tr><td class="week">10주</td><td>Unit 12</td><td>Unit 9 / Unit 13</td></tr>
+            <tr><td class="week">11주</td><td>Unit 12</td><td>Unit 10 / Unit 14</td></tr>
+            <tr><td class="week">12주</td><td>Unit 13</td><td>Unit 10 / Unit 14</td></tr>
+            <tr><td class="week">13주</td><td>Unit 13</td><td>Unit 11 / Unit 14</td></tr>
+            <tr><td class="week">14주</td><td>Unit 14</td><td>Unit 11 / Unit 14</td></tr>
+            <tr class="exam"><td class="week">15주</td><td colspan="2">기말고사 (필기시험)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="footnote">※ 주차별 진도는 수업 진행 상황에 따라 조절될 수 있습니다.</p>
+
+      <h3 class="subhead">휴강 · 보강 일정</h3>
+      <ul class="makeup-list">
+        <li><span>휴강</span><span class="pill">날짜 추후 확정 예정</span></li>
+        <li><span>보강</span><span class="pill">날짜 추후 확정 예정</span></li>
+      </ul>
+      <p class="footnote">※ 휴강·보강 일정은 확정되는 대로 별도 공지드립니다.</p>
+    </div>
+  </section>
+
+  <!-- 3. 교재 및 평가방법 -->
+  <section id="textbook-eval" aria-labelledby="textbook-eval-heading">
+    <div class="section-head">
+      <span class="section-num" aria-hidden="true">3</span>
+      <h2 id="textbook-eval-heading">교재 및 평가방법</h2>
+    </div>
+
+    <div class="card">
+      <h3 class="subhead" style="margin-top:0;">교재</h3>
+      <div class="book-grid">
+        <div class="book-card">
+          <span class="tag">주교재</span>
+          <h3>ETS 토익 단기공략 550+ LC+RC</h3>
+          <p>YBM · 2026-1&amp;2학기 공통 교재</p>
+        </div>
+        <div class="book-card">
+          <span class="tag">단어 부교재</span>
+          <h3>해커스 토익 기출 보카</h3>
+          <p>David Cho · 단어시험용 교재</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 class="subhead" style="margin-top:0;">평가 비율</h3>
+
+      <div class="eval-chart" role="img" aria-label="평가 비율: 출석 20퍼센트, 평소점수 10퍼센트, 중간고사 30퍼센트, 기말고사 40퍼센트">
+        <div class="eval-seg" style="width:20%; background:var(--eval-attend); color:#fff;">20%</div>
+        <div class="eval-seg" style="width:10%; background:var(--eval-daily); color:var(--eval-dark-text);">10%</div>
+        <div class="eval-seg" style="width:30%; background:var(--eval-mid); color:var(--eval-dark-text);">30%</div>
+        <div class="eval-seg" style="width:40%; background:var(--eval-final); color:#fff;">40%</div>
+      </div>
+
+      <div class="eval-legend" aria-hidden="true">
+        <div class="item"><span class="swatch" style="background:var(--eval-attend);"></span>출석 <b>20%</b></div>
+        <div class="item"><span class="swatch" style="background:var(--eval-daily);"></span>평소점수 <b>10%</b></div>
+        <div class="item"><span class="swatch" style="background:var(--eval-mid);"></span>중간고사 <b>30%</b></div>
+        <div class="item"><span class="swatch" style="background:var(--eval-final);"></span>기말고사 <b>40%</b></div>
+      </div>
+
+      <div class="eval-detail-grid">
+        <div class="eval-detail">
+          <div class="head"><span class="dot" style="background:var(--eval-mid);"></span>중간고사 (30%)</div>
+          <ul>
+            <li>필기시험: 객관식 20점 (40문제)</li>
+            <li>교재 단어 10점 (100문제)</li>
+          </ul>
+        </div>
+        <div class="eval-detail">
+          <div class="head"><span class="dot" style="background:var(--eval-final);"></span>기말고사 (40%)</div>
+          <ul>
+            <li>필기시험: 객관식 20점 (40문제)</li>
+            <li>교재 단어 10점 (100문제)</li>
+            <li>정규 토익 성적표 제출 10점</li>
+          </ul>
+        </div>
+        <div class="eval-detail">
+          <div class="head"><span class="dot" style="background:var(--eval-daily);"></span>평소점수 (10%)</div>
+          <ul>
+            <li>단어시험 (주 2회, Day 2개씩 — 아래 "단어시험 방식" 참고)</li>
+            <li>용모복장·수업태도 미비 시 회당 0.5점 감점</li>
+          </ul>
+        </div>
+        <div class="eval-detail">
+          <div class="head"><span class="dot" style="background:var(--eval-attend);"></span>출석 (20%)</div>
+          <ul>
+            <li>지각 3회 = 결석 1회</li>
+            <li>결석 4회 = F</li>
+            <li>매 수업 시작 시 출석 확인</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="note-box">
+        <strong>토익 정규 성적표 제출</strong> — 14주차까지 제출 (기한 후~성적처리기간 중 제출 시 5점, 미제출 시 0점)
+      </div>
+
+      <h3 class="subhead">등급 기준</h3>
+      <div class="table-wrap">
+        <table class="grade">
+          <thead>
+            <tr>
+              <th>A+</th><th>A</th><th>B+</th><th>B</th><th>C+</th><th>C</th><th>D+</th><th>D</th><th>F</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>95점 이상<br>(상위 40%)</td>
+              <td>90점 이상<br>(상위 40%)</td>
+              <td>85~89</td>
+              <td>80~84</td>
+              <td>75~79</td>
+              <td>70~74</td>
+              <td>65~69</td>
+              <td>60~64</td>
+              <td>59점 이하</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="subhead">단어시험 방식</h3>
+      <ul class="quiz-steps">
+        <li>해커스 보카 Day 21 &amp; 22부터 시작</li>
+        <li>Quizizz 앱 활용, 1교시 및 2교시 출석 확인 직후 시행 (객관식 40문제)</li>
+        <li>40개 중 5개 이상 오답 시 당일 특정 시간(추후 안내)에 재시험 진행</li>
+        <li>재시험 미응시 시 0.5점 감점</li>
+        <li>8, 15주차(중간·기말고사 주간)는 단어시험 미실시</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 4. 담당교수 소개 -->
+  <section id="professor" aria-labelledby="professor-heading">
+    <div class="section-head">
+      <span class="section-num" aria-hidden="true">4</span>
+      <h2 id="professor-heading">담당교수 소개</h2>
+    </div>
+    <div class="card prof-card">
+      <figure style="margin:0;">
+        <div class="avatar-wrap">
+          <img id="profPhoto" src="prof_ma_geunjeong.jpg" alt=""
+               onerror="this.style.display='none'; document.getElementById('profInitial').style.display='flex';">
+          <div id="profInitial" class="avatar-initial" style="display:none;" aria-hidden="true">마</div>
+        </div>
+        <figcaption class="sr-only">마근정 교수님 프로필 사진</figcaption>
+      </figure>
+
+      <div>
+        <p class="prof-name">마근정 교수</p>
+        <p class="prof-role">연성대학교 항공서비스과</p>
+        <span class="prof-motto">"Learn a little every day."</span>
+
+        <div class="prof-grid">
+          <div class="prof-field">
+            <h4>담당과목</h4>
+            <div class="subject-tags">
+              <span>TOEIC Basic1</span>
+              <span>TOEIC Basic2</span>
+              <span>TOEIC Grammar</span>
+              <span>대학적응과진로탐색2</span>
+              <span>Cabin English</span>
+              <span>기내방송실무</span>
+              <span>종합설계</span>
+              <span>취업과창업</span>
+            </div>
+          </div>
+
+          <div class="prof-field">
+            <h4>연락처</h4>
+            <p>전화: 031-441-1105<br>이메일: mgj1017@yeonsung.ac.kr</p>
+          </div>
+
+          <div class="prof-field">
+            <h4>주요 경력</h4>
+            <ul>
+              <li>㈜대한항공 객실 사무장 (1999~2010)</li>
+              <li>객실훈련원 Regional flight attendants(동남아 현지 승무원) 서비스 강사</li>
+              <li>객실훈련원 기내방송 강사</li>
+              <li>연성대학교 우수강의교수상 (2016, 2020)</li>
+            </ul>
+          </div>
+
+          <div class="prof-field">
+            <h4>저서</h4>
+            <ul>
+              <li>『영문법과 영작문 한방에 끝내기 1』 (2020)</li>
+              <li>『영문법과 영작문 한방에 끝내기 2』 (2020)</li>
+              <li>『승무원 영어면접 한방에 끝내기』 초판(2016) · 2판(2019)</li>
+              <li>『Practical English for Airline Service』 초판(2017) · 2판(2021)</li>
+              <li>『NCS기반 항공 기내방송 업무』 (2016)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  본 페이지의 일정 및 세부 기준은 학사 진행 상황에 따라 변경될 수 있으며, 변경 시 별도로 안내됩니다.
+</footer>
+
+</body>
+</html>
