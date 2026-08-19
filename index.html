@@ -425,6 +425,19 @@
     font-size: 0.82rem;
   }
 
+  .download-btn{
+    display:inline-block;
+    margin-top: 14px;
+    background: var(--teal);
+    color:#fff;
+    font-weight:700;
+    font-size: 0.88rem;
+    padding: 9px 18px;
+    border-radius: 999px;
+    text-decoration:none;
+  }
+  .download-btn:hover, .download-btn:focus-visible{ background: var(--teal-dark); }
+
   footer{
     text-align:center;
     padding: 30px 20px 50px;
@@ -443,6 +456,7 @@
       <a href="#schedule">강의계획</a>
       <a href="#textbook-eval">교재·평가</a>
       <a href="#professor">교수님 소개</a>
+      <a href="#resources">자료실</a>
     </nav>
   </div>
 </header>
@@ -690,6 +704,31 @@
               <li>『NCS기반 항공 기내방송 업무』 (2016)</li>
             </ul>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. 자료실 -->
+  <section id="resources" aria-labelledby="resources-heading">
+    <div class="section-head">
+      <span class="section-num" aria-hidden="true">5</span>
+      <h2 id="resources-heading">자료실</h2>
+    </div>
+    <div class="card">
+      <h3 class="subhead" style="margin-top:0;">단어 목록 다운로드</h3>
+      <div class="book-grid">
+        <div class="book-card">
+          <span class="tag">주교재 단어</span>
+          <h3>ETS 토익 단기공략 550+ 교재 단어</h3>
+          <p>주교재 단어 목록 (Excel)</p>
+          <a class="download-btn" href="downloads/toeic-basic550-vocab.xlsx" download>파일 다운로드</a>
+        </div>
+        <div class="book-card">
+          <span class="tag">단어 부교재</span>
+          <h3>해커스 보카</h3>
+          <p>단어시험용 단어 목록 (Excel)</p>
+          <a class="download-btn" href="downloads/hackers-voca.xlsx" download>파일 다운로드</a>
         </div>
       </div>
     </div>
