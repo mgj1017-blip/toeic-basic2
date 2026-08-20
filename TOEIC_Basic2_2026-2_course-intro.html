@@ -547,13 +547,13 @@
       <span class="diag-eyebrow">진단평가</span>
       <h2 id="diagHeading">시작 전 간단한 진단평가</h2>
       <p>TOEIC Basic1과 이어지는 수업이라, 과목 소개에 앞서 기초 문법 진단평가를 먼저 풀어봅니다.</p>
-      <p>Part 5 문법 문제 5개, 문제당 30초 제한입니다. 결과에 따라 학습 방향을 안내해 드려요.</p>
+      <p>Part 5 문법 문제 10개, 문제당 30초 제한입니다. 결과에 따라 학습 방향을 안내해 드려요.</p>
       <button type="button" class="diag-start-btn" onclick="diagStart()">진단평가 시작하기</button>
     </div>
 
     <div id="diagQuiz" style="display:none">
       <div class="diag-progress">
-        <span>문항 <span id="diagQNum">1</span> / 5</span>
+        <span>문항 <span id="diagQNum">1</span> / 10</span>
         <span class="timer">남은 시간 <span id="diagTimer">30</span>초</span>
       </div>
       <p id="diagQuestion" class="diag-question"></p>
@@ -563,7 +563,7 @@
     <div id="diagResult" style="display:none">
       <span class="diag-eyebrow">진단평가 결과</span>
       <h2>수고하셨습니다!</h2>
-      <div class="diag-result-score"><span id="diagScore">0</span> / 5</div>
+      <div class="diag-result-score"><span id="diagScore">0</span> / 10</div>
       <div id="diagResultMsg" class="diag-result-msg"></div>
       <button type="button" class="diag-start-btn" onclick="diagFinish()">과목 소개 보러가기</button>
     </div>
@@ -890,7 +890,17 @@
     { text: "All invoices ______ carefully before payments are processed.",
       options: ["check", "checked", "are checked", "checking"], answer: 2 },
     { text: "The board members agreed ______ the merger proposal until next quarter.",
-      options: ["postpone", "postponing", "to postpone", "postponed"], answer: 2 }
+      options: ["postpone", "postponing", "to postpone", "postponed"], answer: 2 },
+    { text: "The seminar provided useful ______ into current market trends.",
+      options: ["insightful", "insight", "insightfully", "insightfulness"], answer: 1 },
+    { text: "The technical support team ______ any issues within 24 hours of being notified.",
+      options: ["resolve", "resolves", "resolving", "to resolve"], answer: 1 },
+    { text: "Customers were ______ satisfied with the new delivery service.",
+      options: ["high", "height", "highly", "higher"], answer: 2 },
+    { text: "The annual conference ______ in Seoul next spring.",
+      options: ["will hold", "will be held", "holds", "held"], answer: 1 },
+    { text: "The manager suggested ______ the meeting until all department heads could attend.",
+      options: ["to delay", "delaying", "delay", "delayed"], answer: 1 }
   ];
   var diagIndex = 0, diagScore = 0, diagTimerId = null, diagTimeLeft = 30;
   var LETTERS = ["A", "B", "C", "D"];
