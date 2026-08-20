@@ -1,0 +1,562 @@
+<title>전치사 5분 복습 퀴즈</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Noto+Sans+KR:wght@400;500;700;900&display=swap">
+<style>
+  :root{
+    --bg:#F8F2FD;
+    --surface:#FFFFFF;
+    --surface-alt:#F1E9FB;
+    --text:#2E2A3D;
+    --muted:#6D6483;
+    --border:#E4D8F5;
+    --accent:#8457C9;
+    --accent-dark:#5E3B99;
+    --accent-contrast:#FFFFFF;
+    --correct:#009E73;
+    --correct-bg:#E1F7EF;
+    --incorrect:#C24E00;
+    --incorrect-bg:#FCEBE0;
+    --shadow: 0 20px 45px -25px rgba(94,59,153,0.35);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --bg:#1D1830;
+      --surface:#28223E;
+      --surface-alt:#332B4C;
+      --text:#F2ECFB;
+      --muted:#BCAFDB;
+      --border:#3C3358;
+      --accent:#B694F0;
+      --accent-dark:#9C78E6;
+      --accent-contrast:#211A38;
+      --correct:#4FD8A8;
+      --correct-bg:rgba(79,216,168,0.14);
+      --incorrect:#FF9C5C;
+      --incorrect-bg:rgba(255,156,92,0.14);
+      --shadow: 0 20px 45px -25px rgba(0,0,0,0.55);
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#1D1830;
+    --surface:#28223E;
+    --surface-alt:#332B4C;
+    --text:#F2ECFB;
+    --muted:#BCAFDB;
+    --border:#3C3358;
+    --accent:#B694F0;
+    --accent-dark:#9C78E6;
+    --accent-contrast:#211A38;
+    --correct:#4FD8A8;
+    --correct-bg:rgba(79,216,168,0.14);
+    --incorrect:#FF9C5C;
+    --incorrect-bg:rgba(255,156,92,0.14);
+    --shadow: 0 20px 45px -25px rgba(0,0,0,0.55);
+  }
+
+  *{ box-sizing:border-box; }
+  [hidden]{ display:none !important; }
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:"Noto Sans KR", "Sora", -apple-system, sans-serif;
+    display:flex;
+    justify-content:center;
+    padding:32px 16px 56px;
+    min-height:100vh;
+  }
+  .app{ width:100%; max-width:520px; display:flex; flex-direction:column; gap:16px; }
+
+  .topbar{ display:flex; flex-direction:column; gap:12px; }
+  .brand{
+    font-family:"Sora", sans-serif;
+    font-weight:700;
+    font-size:13px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    color:var(--accent-dark);
+  }
+  .dots{ display:flex; gap:8px; }
+  .dot{
+    flex:1;
+    height:6px;
+    border-radius:999px;
+    background:var(--border);
+    position:relative;
+    overflow:hidden;
+  }
+  .dot.current{ background:var(--border); }
+  .dot.current::after{
+    content:"";
+    position:absolute; inset:0;
+    background:var(--accent);
+    width:40%;
+  }
+  .dot.done-first::after, .dot.done-retry::after, .dot.done-timeout::after{
+    content:""; position:absolute; inset:0; width:100%;
+  }
+  .dot.done-first::after{ background:var(--correct); }
+  .dot.done-retry::after{ background:var(--accent); }
+  .dot.done-timeout::after{ background:var(--incorrect); }
+
+  .card{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:24px 22px 22px;
+    box-shadow:var(--shadow);
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+  }
+
+  .qmeta{ display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .qnum{ font-family:"Sora", sans-serif; font-weight:700; font-size:15px; color:var(--muted); font-variant-numeric:tabular-nums; }
+  .qnum #qIndex{ color:var(--text); font-size:20px; }
+  .qtotal{ font-size:13px; }
+
+  .timerWrap{ display:flex; align-items:center; gap:10px; flex:1; max-width:220px; }
+  .timerBar{
+    flex:1;
+    height:8px;
+    border-radius:999px;
+    background:var(--surface-alt);
+    overflow:hidden;
+  }
+  .timerFill{
+    height:100%;
+    width:100%;
+    background:var(--accent);
+    border-radius:999px;
+    transition:width 0.1s linear, background 0.2s ease;
+  }
+  .timerFill.urgent{ background:var(--incorrect); }
+  .timerNum{
+    font-family:"Sora", sans-serif;
+    font-weight:700;
+    font-variant-numeric:tabular-nums;
+    font-size:15px;
+    min-width:2ch;
+    text-align:right;
+    color:var(--text);
+  }
+
+  .question{
+    margin:0;
+    font-size:17px;
+    line-height:1.55;
+    font-weight:500;
+  }
+  .question .blank{ font-weight:700; color:var(--accent-dark); }
+
+  .options{ display:flex; flex-direction:column; gap:10px; }
+  .option{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-align:left;
+    padding:13px 14px;
+    border-radius:12px;
+    border:1.5px solid var(--border);
+    background:var(--surface-alt);
+    color:var(--text);
+    font-size:15.5px;
+    font-family:inherit;
+    cursor:pointer;
+    transition:border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  }
+  .option:hover:not(:disabled){ border-color:var(--accent); }
+  .option:active:not(:disabled){ transform:scale(0.99); }
+  .option .letter{
+    font-family:"Sora", sans-serif;
+    font-weight:700;
+    font-size:13px;
+    width:24px; height:24px;
+    border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    background:var(--surface);
+    color:var(--muted);
+    flex-shrink:0;
+  }
+  .option.correct{
+    background:var(--correct-bg);
+    border-color:var(--correct);
+    color:var(--correct);
+    font-weight:700;
+  }
+  .option.correct .letter{ background:var(--correct); color:var(--accent-contrast); }
+  .option.incorrect{
+    background:var(--incorrect-bg);
+    border-color:var(--incorrect);
+    color:var(--incorrect);
+  }
+  .option.incorrect .letter{ background:var(--incorrect); color:var(--accent-contrast); }
+  .option:disabled{ cursor:default; }
+  .option.timeout-reveal{ animation:pulse 0.5s ease; }
+  @keyframes pulse{ 0%{ transform:scale(1);} 40%{ transform:scale(1.02);} 100%{ transform:scale(1);} }
+
+  .statusLine{
+    font-size:13px;
+    font-weight:700;
+    color:var(--incorrect);
+    display:none;
+    align-items:center;
+    gap:6px;
+  }
+  .statusLine.show{ display:flex; }
+
+  .explainPanel{ display:none; flex-direction:column; gap:0; }
+  .explainPanel.ready{ display:flex; }
+  .explainToggle{
+    align-self:flex-start;
+    background:none;
+    border:none;
+    color:var(--accent-dark);
+    font-family:"Noto Sans KR", sans-serif;
+    font-weight:700;
+    font-size:14px;
+    cursor:pointer;
+    padding:4px 0;
+    display:flex;
+    align-items:center;
+    gap:6px;
+  }
+  .explainToggle .chev{ transition:transform 0.15s ease; display:inline-block; }
+  .explainToggle.open .chev{ transform:rotate(180deg); }
+  .explainBody{
+    max-height:0;
+    opacity:0;
+    overflow:hidden;
+    transition:max-height 0.25s ease, opacity 0.2s ease, margin 0.25s ease;
+    background:var(--surface-alt);
+    border-radius:12px;
+    font-size:14.5px;
+    line-height:1.6;
+    color:var(--muted);
+  }
+  .explainBody.open{
+    max-height:300px;
+    opacity:1;
+    padding:14px 16px;
+    margin-top:8px;
+  }
+  .explainBody b{ color:var(--text); }
+
+  .nextBtn{
+    display:none;
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:none;
+    background:var(--accent);
+    color:var(--accent-contrast);
+    font-family:"Sora", sans-serif;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+    transition:background 0.15s ease;
+  }
+  .nextBtn:hover{ background:var(--accent-dark); }
+  .nextBtn.show{ display:block; }
+
+  /* result screen */
+  .resultHead{ display:flex; flex-direction:column; gap:6px; align-items:flex-start; }
+  .resultHead .eyebrow{ font-family:"Sora", sans-serif; font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:var(--muted); }
+  .resultScore{ font-family:"Sora", sans-serif; font-size:44px; font-weight:700; font-variant-numeric:tabular-nums; color:var(--accent-dark); }
+  .resultScore span{ font-size:20px; color:var(--muted); font-weight:600; }
+  .recap{ display:flex; flex-direction:column; gap:8px; }
+  .recapItem{
+    display:flex; align-items:center; gap:10px;
+    padding:10px 12px;
+    border-radius:10px;
+    background:var(--surface-alt);
+    font-size:14px;
+  }
+  .recapIcon{ font-weight:700; width:20px; text-align:center; flex-shrink:0; }
+  .recapItem.first .recapIcon{ color:var(--correct); }
+  .recapItem.retry .recapIcon{ color:var(--accent); }
+  .recapItem.timeout .recapIcon{ color:var(--incorrect); }
+  .recapTag{ margin-left:auto; font-size:12px; color:var(--muted); }
+  .restartBtn{
+    width:100%;
+    padding:14px;
+    border-radius:12px;
+    border:1.5px solid var(--accent);
+    background:transparent;
+    color:var(--accent-dark);
+    font-family:"Sora", sans-serif;
+    font-weight:700;
+    font-size:15px;
+    cursor:pointer;
+  }
+  :root[data-theme="dark"] .restartBtn, @media (prefers-color-scheme:dark){ .restartBtn{ color:var(--accent); } }
+
+  @media (prefers-reduced-motion: reduce){
+    *{ transition:none !important; animation:none !important; }
+  }
+</style>
+
+<div class="app">
+  <header class="topbar">
+    <div class="brand">TOEIC RC · Unit 08 전치사 5분 복습</div>
+    <div class="dots" id="dots"></div>
+  </header>
+
+  <main class="card" id="quizScreen">
+    <div class="qmeta">
+      <div class="qnum">Q<span id="qIndex">1</span><span class="qtotal">/5</span></div>
+      <div class="timerWrap">
+        <div class="timerBar"><div class="timerFill" id="timerFill"></div></div>
+        <div class="timerNum" id="timerNum">20</div>
+      </div>
+    </div>
+
+    <p class="question" id="questionText"></p>
+
+    <div class="options" id="optionsList"></div>
+
+    <div class="statusLine" id="statusLine"></div>
+
+    <div class="explainPanel" id="explainPanel">
+      <button class="explainToggle" id="explainToggle" disabled>
+        <span class="chev">▾</span><span id="explainLabel">정답을 맞추면 해설이 열려요</span>
+      </button>
+      <div class="explainBody" id="explainBody"></div>
+    </div>
+
+    <button class="nextBtn" id="nextBtn">다음 문제</button>
+  </main>
+
+  <section class="card" id="resultScreen" hidden>
+    <div class="resultHead">
+      <div class="eyebrow">복습 완료</div>
+      <div class="resultScore"><span id="firstCount">0</span><span>/5 한 번에 정답</span></div>
+    </div>
+    <div class="recap" id="recap"></div>
+    <button class="restartBtn" id="restartBtn">다시 풀기</button>
+  </section>
+</div>
+
+<script>
+(function(){
+  var QUESTIONS = [
+    {
+      en: 'All expense reports must be submitted _____ the end of this month.',
+      options: ['until', 'by', 'since', 'during'],
+      answer: 1,
+      explain: '<b>by</b>는 특정 시점까지 동작이 <b>완료</b>됨을 나타내고, <b>until</b>은 그 시점까지 상태가 <b>지속</b>됨을 나타냅니다. "제출하다(submit)"는 한 번에 끝나는 완료 동작이므로 <b>by</b>가 정답입니다.'
+    },
+    {
+      en: 'The awards ceremony will be held in the hall _____ the two main lecture rooms.',
+      options: ['between', 'among', 'across', 'throughout'],
+      answer: 0,
+      explain: '<b>between</b>은 대상이 <b>둘</b>일 때, <b>among</b>은 <b>셋 이상</b>일 때 씁니다. "the two main lecture rooms(두 개의 강의실)"이므로 <b>between</b>이 정답입니다.'
+    },
+    {
+      en: '_____ the sudden rise in shipping costs, the company decided not to raise its product prices.',
+      options: ['Due to', 'Despite', 'Because', 'Owing to'],
+      answer: 1,
+      explain: '<b>due to / owing to</b>는 "~때문에"라는 <b>이유</b>를 나타내고, <b>despite</b>는 "~에도 불구하고"라는 <b>양보(대조)</b>를 나타냅니다. 비용은 올랐지만 가격은 <b>올리지 않았다</b>는 대조 관계이므로 <b>despite</b>가 정답입니다. because는 접속사라서 뒤에 절이 와야 하므로 명사구 앞에는 쓸 수 없습니다.'
+    },
+    {
+      en: 'Please contact our support team _____ any issues with your account.',
+      options: ['regard', 'regards', 'regarding', 'regarded'],
+      answer: 2,
+      explain: '<b>regarding</b>은 "~에 관하여"라는 뜻의 -ing형 전치사입니다. regard(동사원형), regards(명사/3인칭단수동사), regarded(과거분사)는 전치사 자리에 올 수 없습니다.'
+    },
+    {
+      en: '_____ attending the new-employee orientation, all staff must submit a signed safety agreement.',
+      options: ['In addition to', 'Provided that', 'As well', 'In order that'],
+      answer: 0,
+      explain: '<b>in addition to</b>는 "~외에도"라는 뜻의 2단어 전치사로 뒤에 명사/동명사가 옵니다. provided that과 in order that은 <b>접속사</b>, as well은 <b>부사</b>라서 뒤에 바로 동명사(attending)가 올 수 없습니다.'
+    }
+  ];
+
+  var TIME_LIMIT = 20;
+  var idx = 0;
+  var locked = false;
+  var wrongSet = new Set();
+  var results = [];
+  var timerHandle = null;
+  var timeLeft = TIME_LIMIT;
+
+  var qIndexEl = document.getElementById('qIndex');
+  var questionTextEl = document.getElementById('questionText');
+  var optionsListEl = document.getElementById('optionsList');
+  var timerFillEl = document.getElementById('timerFill');
+  var timerNumEl = document.getElementById('timerNum');
+  var statusLineEl = document.getElementById('statusLine');
+  var explainPanelEl = document.getElementById('explainPanel');
+  var explainToggleEl = document.getElementById('explainToggle');
+  var explainLabelEl = document.getElementById('explainLabel');
+  var explainBodyEl = document.getElementById('explainBody');
+  var nextBtnEl = document.getElementById('nextBtn');
+  var dotsEl = document.getElementById('dots');
+  var quizScreenEl = document.getElementById('quizScreen');
+  var resultScreenEl = document.getElementById('resultScreen');
+  var firstCountEl = document.getElementById('firstCount');
+  var recapEl = document.getElementById('recap');
+  var restartBtnEl = document.getElementById('restartBtn');
+
+  function renderDots(){
+    dotsEl.innerHTML = '';
+    for (var i = 0; i < QUESTIONS.length; i++){
+      var d = document.createElement('div');
+      d.className = 'dot';
+      if (results[i] === 'first') d.className += ' done-first';
+      else if (results[i] === 'retry') d.className += ' done-retry';
+      else if (results[i] === 'timeout') d.className += ' done-timeout';
+      else if (i === idx) d.className += ' current';
+      dotsEl.appendChild(d);
+    }
+  }
+
+  function fmtQuestion(text){
+    return text.replace('_____', '<span class="blank">_____</span>');
+  }
+
+  function renderQuestion(){
+    var q = QUESTIONS[idx];
+    locked = false;
+    wrongSet = new Set();
+    timeLeft = TIME_LIMIT;
+
+    qIndexEl.textContent = idx + 1;
+    questionTextEl.innerHTML = fmtQuestion(q.en);
+    statusLineEl.className = 'statusLine';
+    statusLineEl.textContent = '';
+
+    optionsListEl.innerHTML = '';
+    var letters = ['A', 'B', 'C', 'D'];
+    q.options.forEach(function(opt, i){
+      var btn = document.createElement('button');
+      btn.className = 'option';
+      btn.innerHTML = '<span class="letter">' + letters[i] + '</span><span>' + opt + '</span>';
+      btn.addEventListener('click', function(){ selectOption(btn, i); });
+      optionsListEl.appendChild(btn);
+    });
+
+    explainPanelEl.classList.remove('ready');
+    explainToggleEl.disabled = true;
+    explainToggleEl.classList.remove('open');
+    explainLabelEl.textContent = '정답을 맞추면 해설이 열려요';
+    explainBodyEl.classList.remove('open');
+    explainBodyEl.innerHTML = q.explain;
+
+    nextBtnEl.classList.remove('show');
+    nextBtnEl.textContent = idx === QUESTIONS.length - 1 ? '결과 보기' : '다음 문제';
+
+    renderDots();
+    startTimer();
+  }
+
+  function startTimer(){
+    clearInterval(timerHandle);
+    updateTimerUI();
+    timerHandle = setInterval(function(){
+      timeLeft -= 0.1;
+      if (timeLeft <= 0){
+        timeLeft = 0;
+        updateTimerUI();
+        clearInterval(timerHandle);
+        if (!locked) lockQuestion('timeout');
+        return;
+      }
+      updateTimerUI();
+    }, 100);
+  }
+
+  function updateTimerUI(){
+    var pct = Math.max(0, (timeLeft / TIME_LIMIT) * 100);
+    timerFillEl.style.width = pct + '%';
+    timerFillEl.classList.toggle('urgent', timeLeft <= 5);
+    timerNumEl.textContent = Math.ceil(timeLeft);
+  }
+
+  function selectOption(btn, i){
+    if (locked) return;
+    var q = QUESTIONS[idx];
+    if (i === q.answer){
+      btn.classList.add('correct');
+      lockQuestion(wrongSet.size === 0 ? 'first' : 'retry');
+    } else if (!wrongSet.has(i)){
+      wrongSet.add(i);
+      btn.classList.add('incorrect');
+      btn.disabled = true;
+      statusLineEl.textContent = '오답이에요. 다른 보기를 골라보세요.';
+      statusLineEl.classList.add('show');
+    }
+  }
+
+  function lockQuestion(resultType){
+    locked = true;
+    clearInterval(timerHandle);
+    results[idx] = resultType;
+
+    var buttons = optionsListEl.querySelectorAll('.option');
+    buttons.forEach(function(b, i){
+      b.disabled = true;
+      if (i === QUESTIONS[idx].answer && resultType === 'timeout'){
+        b.classList.add('correct', 'timeout-reveal');
+      }
+    });
+
+    if (resultType === 'timeout'){
+      statusLineEl.textContent = '시간 종료! 정답을 확인해보세요.';
+      statusLineEl.classList.add('show');
+    } else {
+      statusLineEl.classList.remove('show');
+    }
+
+    explainPanelEl.classList.add('ready');
+    explainToggleEl.disabled = false;
+    explainLabelEl.textContent = '해설 보기';
+
+    renderDots();
+    nextBtnEl.classList.add('show');
+  }
+
+  explainToggleEl.addEventListener('click', function(){
+    var isOpen = explainBodyEl.classList.toggle('open');
+    explainToggleEl.classList.toggle('open', isOpen);
+    explainLabelEl.textContent = isOpen ? '해설 숨기기' : '해설 보기';
+  });
+
+  nextBtnEl.addEventListener('click', function(){
+    idx += 1;
+    if (idx >= QUESTIONS.length){
+      showResult();
+    } else {
+      renderQuestion();
+    }
+  });
+
+  function showResult(){
+    quizScreenEl.hidden = true;
+    resultScreenEl.hidden = false;
+
+    var firstCount = results.filter(function(r){ return r === 'first'; }).length;
+    firstCountEl.textContent = firstCount;
+
+    recapEl.innerHTML = '';
+    QUESTIONS.forEach(function(q, i){
+      var r = results[i];
+      var row = document.createElement('div');
+      row.className = 'recapItem ' + r;
+      var icon = r === 'first' ? '✓' : (r === 'retry' ? '↻' : '✕');
+      var tag = r === 'first' ? '한 번에 정답' : (r === 'retry' ? '다시 맞춤' : '시간 초과');
+      row.innerHTML = '<span class="recapIcon">' + icon + '</span><span>Q' + (i + 1) + '. ' + q.options[q.answer] + '</span><span class="recapTag">' + tag + '</span>';
+      recapEl.appendChild(row);
+    });
+  }
+
+  restartBtnEl.addEventListener('click', function(){
+    idx = 0;
+    results = [];
+    resultScreenEl.hidden = true;
+    quizScreenEl.hidden = false;
+    renderQuestion();
+  });
+
+  renderQuestion();
+})();
+</script>
