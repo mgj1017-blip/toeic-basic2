@@ -104,14 +104,20 @@
   /* ---------- Hero ---------- */
   .hero{
     position: relative;
-    padding: 90px 20px 70px;
+    overflow: hidden;
+    padding: 90px 20px 84px;
     text-align:center;
     color:#fff;
     background:
-      linear-gradient(180deg, rgba(18,24,29,0.68), rgba(18,24,29,0.82)),
+      linear-gradient(180deg, rgba(7,38,58,0.58), rgba(5,26,42,0.8)),
       url('assets/hero-plane-wing.jpg');
     background-size: cover;
     background-position: center;
+  }
+  .hero-cloud{
+    position:absolute; left:0; right:0; bottom:-1px;
+    width:100%; height:56px;
+    display:block;
   }
   .hero-inner{ max-width: 980px; margin: 0 auto; }
   .eyebrow{
@@ -578,6 +584,9 @@
     <p class="semester">2026학년도 2학기</p>
     <p class="welcome">환영합니다! 이번 학기도 목표를 향해 차근차근, 함께 준비해봐요.</p>
   </div>
+  <svg class="hero-cloud" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,40 Q60,10 120,38 T240,36 T360,40 T480,34 T600,40 T720,36 T840,40 T960,34 T1080,40 T1200,36 T1320,40 T1440,36 L1440,60 L0,60 Z" fill="#F7F8FA"/>
+  </svg>
 </div>
 
 <div class="diag-wrap">
