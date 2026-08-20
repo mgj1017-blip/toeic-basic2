@@ -6,15 +6,24 @@
 <title>TOEIC Basic 2 (2026-2학기) 과목 소개</title>
 <style>
   :root{
-    --bg: #F3ECFB;
+    --bg: #F7F8FA;
     --card: #FFFFFF;
-    --ink: #2E2A3D;
-    --ink-soft: #6D6483;
-    --teal: #8457C9;
-    --teal-dark: #5E3B99;
-    --coral: #B03D8A;
-    --cream-border: #E4D8F5;
-    --focus: #5E3B99;
+    --ink: #23303A;
+    --ink-soft: #5B6672;
+    --teal: #3A4750;
+    --teal-dark: #29343C;
+    --coral: #B8296C;
+    --cream-border: #E3E7EB;
+    --focus: #29343C;
+
+    /* Yeonsung University brand accent colors (sampled from official logo) */
+    --brand-blue: #1AB7EA;
+    --brand-blue-tint: #E6F7FC;
+    --brand-blue-text: #0E7FA8;
+    --brand-pink-tint: #FCEAF3;
+    --brand-green: #C1D72E;
+    --brand-green-tint: #F5F9E3;
+    --brand-green-text: #5C6B0F;
 
     /* Okabe-Ito colorblind-safe palette for evaluation chart */
     --eval-attend: #0072B2;   /* 출석 20% - white text, contrast 5.18:1 */
@@ -30,7 +39,7 @@
     margin:0;
     font-family: "Apple SD Gothic Neo","Malgun Gothic","Segoe UI",sans-serif;
     background-color: var(--bg);
-    background-image: linear-gradient(160deg, #F8F2FD 0%, #EFE4FA 45%, #F3ECFB 100%);
+    background-image: linear-gradient(160deg, #FFFFFF 0%, #F7F8FA 55%, #F1F3F5 100%);
     color: var(--ink);
     line-height: 1.6;
   }
@@ -55,11 +64,17 @@
   /* ---------- Nav ---------- */
   header.topnav{
     position: sticky; top:0; z-index: 50;
-    background: rgba(248,242,253,0.93);
+    background: rgba(255,255,255,0.92);
     backdrop-filter: blur(6px);
     border-bottom: 1px solid var(--cream-border);
   }
+  header.topnav::before{
+    content:'';
+    position:absolute; top:0; left:0; right:0; height:4px;
+    background: linear-gradient(90deg, var(--brand-blue) 0%, var(--coral) 50%, var(--brand-green) 100%);
+  }
   .nav-inner{
+    position:relative;
     max-width: 980px; margin:0 auto;
     display:flex; align-items:center; justify-content:space-between;
     padding: 12px 20px;
@@ -71,6 +86,7 @@
     font-size: 1.05rem;
     white-space: nowrap;
   }
+  .nav-logo{ height: 26px; width:auto; display:block; }
   nav.links{ display:flex; gap: 6px; flex-wrap: wrap; }
   nav.links a{
     text-decoration:none;
@@ -93,8 +109,8 @@
   }
   .eyebrow{
     display:inline-block;
-    background: #EFE2FA;
-    color: var(--teal-dark);
+    background: var(--brand-blue-tint);
+    color: var(--brand-blue-text);
     font-weight:700;
     font-size: 0.85rem;
     padding: 6px 14px;
@@ -129,7 +145,7 @@
     flex-wrap: wrap;
   }
   .section-num{
-    font-weight:800; color:#fff; background: var(--coral);
+    font-weight:800; color:#fff; background: var(--teal);
     border-radius: 50%;
     width: 34px; height:34px;
     display:flex; align-items:center; justify-content:center;
@@ -145,7 +161,7 @@
     border: 1px solid var(--cream-border);
     border-radius: 18px;
     padding: 24px;
-    box-shadow: 0 4px 14px rgba(46,42,61,0.06);
+    box-shadow: 0 2px 12px rgba(35,48,58,0.07);
   }
   .card + .card{ margin-top: 18px; }
 
@@ -178,10 +194,6 @@
     color: var(--coral);
     margin-left: 6px;
   }
-  .goal-box .cheer{
-    margin-top: 14px;
-    color: var(--ink-soft);
-  }
 
   /* ---------- Table (weekly schedule) ---------- */
   .table-wrap{ overflow-x:auto; }
@@ -203,14 +215,14 @@
     font-size: 0.95rem;
   }
   table.schedule thead th{
-    background: #F1E9FB;
+    background: #EEF1F4;
     color: var(--ink);
     font-weight:700;
     position: sticky; top: 0;
   }
-  table.schedule tbody tr:hover{ background: #FAF5FE; }
+  table.schedule tbody tr:hover{ background: #F5F7F9; }
   table.schedule tr.exam td{
-    background: #FBEAF6;
+    background: var(--brand-pink-tint);
     font-weight:700;
     color: var(--coral);
   }
@@ -227,7 +239,7 @@
   }
   .makeup-list li{
     display:flex; align-items:center; justify-content:space-between;
-    background: #FAF5FE;
+    background: #F5F7F9;
     border: 1px dashed var(--cream-border);
     border-radius: 12px;
     padding: 12px 16px;
@@ -236,7 +248,7 @@
     gap: 6px;
   }
   .pill{
-    background: #F1E9FB;
+    background: #EEF1F4;
     color: var(--ink-soft);
     font-weight:700;
     font-size: 0.82rem;
@@ -253,18 +265,20 @@
     border: 1px solid var(--cream-border);
     border-radius: 14px;
     padding: 18px;
-    background: #FCFAFE;
+    background: #FBFCFD;
   }
   .book-card .tag{
     display:inline-block;
     font-size: 0.78rem;
     font-weight:700;
-    color: var(--teal-dark);
-    background:#EFE2FA;
+    color: var(--brand-blue-text);
+    background: var(--brand-blue-tint);
     padding:3px 10px;
     border-radius: 999px;
     margin-bottom: 8px;
   }
+  .book-card .tag.tag-pink{ color: var(--coral); background: var(--brand-pink-tint); }
+  .book-card .tag.tag-green{ color: var(--brand-green-text); background: var(--brand-green-tint); }
   .book-card h3{ margin: 4px 0 4px; font-size: 1.05rem; }
   .book-card p{ margin:0; color: var(--ink-soft); font-size: 0.9rem; }
 
@@ -319,7 +333,7 @@
     border-radius: 14px;
     padding: 16px 18px;
     border: 1px solid var(--cream-border);
-    background: #FCFAFE;
+    background: #FBFCFD;
   }
   .eval-detail .head{
     display:flex; align-items:center; gap: 8px;
@@ -340,11 +354,11 @@
     padding: 8px;
     text-align:center;
   }
-  table.grade thead th{ background:#F1E9FB; }
+  table.grade thead th{ background:#EEF1F4; }
 
   .note-box{
-    background:#F3EAFC;
-    border: 1px solid #D9BEEF;
+    background: var(--brand-blue-tint);
+    border: 1px solid #BEE7F2;
     border-radius: 12px;
     padding: 14px 16px;
     font-size: 0.9rem;
@@ -378,7 +392,7 @@
     background: linear-gradient(135deg, var(--teal), var(--teal-dark));
     display:flex; align-items:center; justify-content:center;
     flex-shrink:0;
-    box-shadow: 0 6px 18px rgba(132,87,201,0.28);
+    box-shadow: 0 6px 18px rgba(58,71,80,0.28);
   }
   .avatar-wrap img{
     width:100%; height:100%; object-fit: cover;
@@ -395,8 +409,8 @@
   .prof-motto{
     display:inline-block;
     font-style: italic;
-    color: var(--teal-dark);
-    background:#EFE2FA;
+    color: var(--brand-blue-text);
+    background: var(--brand-blue-tint);
     padding: 6px 14px;
     border-radius: 999px;
     font-size:0.88rem;
@@ -421,11 +435,16 @@
   .prof-field ul{ padding-left: 18px; }
   .subject-tags{ display:flex; flex-wrap:wrap; gap:6px; }
   .subject-tags span{
-    background:#F1E9FB;
+    background:#EEF1F4;
+    color: var(--ink);
+    font-weight:600;
     border-radius: 999px;
     padding: 3px 10px;
     font-size: 0.82rem;
   }
+  .subject-tags span:nth-child(3n+1){ background: var(--brand-blue-tint); }
+  .subject-tags span:nth-child(3n+2){ background: var(--brand-pink-tint); }
+  .subject-tags span:nth-child(3n){ background: var(--brand-green-tint); }
 
   .download-btn{
     display:inline-block;
@@ -440,6 +459,77 @@
   }
   .download-btn:hover, .download-btn:focus-visible{ background: var(--teal-dark); }
 
+  /* ---------- Diagnostic gate ---------- */
+  .diag-overlay{
+    position:fixed; inset:0; z-index:500;
+    background: var(--bg);
+    display:flex; align-items:center; justify-content:center;
+    padding: 24px; overflow-y:auto;
+  }
+  .diag-box{
+    position:relative; overflow:hidden;
+    max-width: 640px; width:100%;
+    background: var(--card);
+    border-radius: 18px;
+    padding: 36px 32px;
+    box-shadow: 0 12px 32px rgba(35,48,58,0.16);
+  }
+  .diag-box::before{
+    content:''; position:absolute; top:0; left:0; right:0; height:4px;
+    background: linear-gradient(90deg, var(--brand-blue) 0%, var(--coral) 50%, var(--brand-green) 100%);
+  }
+  .diag-eyebrow{
+    display:inline-block;
+    background: var(--brand-blue-tint); color: var(--brand-blue-text);
+    font-weight:700; font-size:0.82rem;
+    padding: 5px 12px; border-radius: 999px;
+    margin-bottom: 14px;
+  }
+  .diag-box h2{ margin: 0 0 12px; font-size: 1.4rem; }
+  .diag-box p{ color: var(--ink-soft); line-height:1.7; margin: 0 0 10px; }
+  .diag-start-btn{
+    display:inline-block; margin-top: 18px;
+    background: var(--teal); color:#fff; font-weight:700;
+    font-size: 0.95rem; padding: 12px 24px; border-radius: 999px;
+    border:none; cursor:pointer;
+  }
+  .diag-start-btn:hover, .diag-start-btn:focus-visible{ background: var(--teal-dark); }
+  .diag-progress{
+    display:flex; justify-content:space-between; align-items:center;
+    font-size: 0.85rem; font-weight:700; color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .diag-progress .timer{ color: var(--coral); }
+  .diag-question{
+    font-size: 1.05rem; color: var(--ink); font-weight:600;
+    line-height:1.7; margin-bottom: 18px;
+  }
+  .diag-options{ display:grid; gap: 10px; }
+  .diag-option{
+    display:flex; align-items:center; gap: 10px;
+    text-align:left;
+    background: #FBFCFD; border: 1px solid var(--cream-border);
+    border-radius: 12px; padding: 12px 16px;
+    font-size: 0.95rem; color: var(--ink);
+    cursor:pointer; font-family:inherit;
+  }
+  .diag-option:hover, .diag-option:focus-visible{ border-color: var(--teal); background: var(--brand-blue-tint); }
+  .diag-option .letter{
+    font-weight:800; color: var(--teal-dark);
+    width: 22px; flex-shrink:0;
+  }
+  .diag-result-score{
+    font-size: 2rem; font-weight:800; color: var(--teal-dark);
+    margin-bottom: 10px;
+  }
+  .diag-result-msg{
+    background: var(--brand-blue-tint);
+    border-radius: 12px; padding: 16px 18px;
+    color: var(--ink); line-height:1.7;
+    margin: 14px 0 6px;
+  }
+  .diag-result-msg.pass{ background: var(--brand-green-tint); }
+
   footer{
     text-align:center;
     padding: 30px 20px 50px;
@@ -448,7 +538,38 @@
   }
 </style>
 </head>
-<body>
+<body style="overflow:hidden">
+
+<div id="diagOverlay" class="diag-overlay" role="dialog" aria-modal="true" aria-labelledby="diagHeading">
+  <div class="diag-box">
+
+    <div id="diagIntro">
+      <span class="diag-eyebrow">진단평가</span>
+      <h2 id="diagHeading">시작 전 간단한 진단평가</h2>
+      <p>TOEIC Basic1과 이어지는 수업이라, 과목 소개에 앞서 기초 문법 진단평가를 먼저 풀어봅니다.</p>
+      <p>Part 5 문법 문제 5개, 문제당 30초 제한입니다. 결과에 따라 학습 방향을 안내해 드려요.</p>
+      <button type="button" class="diag-start-btn" onclick="diagStart()">진단평가 시작하기</button>
+    </div>
+
+    <div id="diagQuiz" style="display:none">
+      <div class="diag-progress">
+        <span>문항 <span id="diagQNum">1</span> / 5</span>
+        <span class="timer">남은 시간 <span id="diagTimer">30</span>초</span>
+      </div>
+      <p id="diagQuestion" class="diag-question"></p>
+      <div id="diagOptions" class="diag-options"></div>
+    </div>
+
+    <div id="diagResult" style="display:none">
+      <span class="diag-eyebrow">진단평가 결과</span>
+      <h2>수고하셨습니다!</h2>
+      <div class="diag-result-score"><span id="diagScore">0</span> / 5</div>
+      <div id="diagResultMsg" class="diag-result-msg"></div>
+      <button type="button" class="diag-start-btn" onclick="diagFinish()">과목 소개 보러가기</button>
+    </div>
+
+  </div>
+</div>
 
 <header class="topnav">
   <div class="nav-inner">
@@ -460,6 +581,7 @@
       <a href="#professor">교수님 소개</a>
       <a href="#resources">자료실</a>
     </nav>
+    <img class="nav-logo" src="assets/yeonsung-logo.png" alt="연성대학교 로고">
   </div>
 </header>
 
@@ -481,8 +603,7 @@
     <div class="card goal-box">
       <p class="overview">토익 시험을 위한 영어의 기초를 다지는 수업으로, 각 파트에 대한 이해를 높여 토익 실전 시험에 대비하고, 정기토익에서 550점 이상 취득을 목표로 한다.</p>
       <div class="label">목표 점수</div>
-      <div class="score">550<span aria-hidden="true">~</span>600<small>점 이상</small></div>
-      <p class="cheer">이번 학기 목표를 향해 함께 파이팅해봅시다!</p>
+      <div class="score">550<small>점 이상</small></div>
     </div>
   </section>
 
@@ -549,7 +670,7 @@
           <p>YBM · 2026-1&amp;2학기 공통 교재</p>
         </div>
         <div class="book-card">
-          <span class="tag">단어 부교재</span>
+          <span class="tag tag-pink">단어 부교재</span>
           <h3>해커스 토익 기출 보카</h3>
           <p>David Cho · 단어시험용 교재</p>
         </div>
@@ -607,7 +728,7 @@
       </div>
 
       <div class="note-box">
-        <strong>토익 정규 성적표 제출</strong> — 14주차까지 제출 (기한 후~성적처리기간 중 제출 시 5점, 미제출 시 0점)
+        <strong>토익 정규 성적표 제출</strong> — 15주차 기말고사 시간에 출력본으로 제출
       </div>
 
       <h3 class="subhead">등급 기준</h3>
@@ -637,7 +758,7 @@
       <h3 class="subhead">단어시험 방식</h3>
       <ul class="quiz-steps">
         <li>해커스 보카 Day 21 &amp; 22부터 시작</li>
-        <li>Quizizz 앱 활용, 1교시 및 2교시 출석 확인 직후 시행 (객관식 40문제)</li>
+        <li>Wayground 앱 활용, 1교시 및 2교시 출석 확인 직후 시행 (객관식 40문제)</li>
         <li>40개 중 5개 이상 오답 시 당일 특정 시간(추후 안내)에 재시험 진행</li>
         <li>재시험 미응시 시 0.5점 감점</li>
         <li>8, 15주차(중간·기말고사 주간)는 단어시험 미실시</li>
@@ -727,10 +848,26 @@
           <a class="download-btn" href="downloads/toeic-basic550-vocab.xlsx" download>파일 다운로드</a>
         </div>
         <div class="book-card">
-          <span class="tag">단어 부교재</span>
+          <span class="tag tag-pink">단어 부교재</span>
           <h3>해커스 보카</h3>
           <p>단어시험용 단어 목록 (Excel)</p>
           <a class="download-btn" href="downloads/hackers-voca.xlsx" download>파일 다운로드</a>
+        </div>
+      </div>
+
+      <h3 class="subhead">LC 음원 파일</h3>
+      <div class="book-grid">
+        <div class="book-card">
+          <span class="tag tag-green">Part 3</span>
+          <h3>ETS 토익 단기공략 550+ Part 3 음원</h3>
+          <p>LC Part 3 음원 파일 (ZIP, 약 24MB)</p>
+          <a class="download-btn" href="downloads/550_Part3.zip" download>파일 다운로드</a>
+        </div>
+        <div class="book-card">
+          <span class="tag tag-green">Part 4</span>
+          <h3>ETS 토익 단기공략 550+ Part 4 음원</h3>
+          <p>LC Part 4 음원 파일 (ZIP, 약 24MB)</p>
+          <a class="download-btn" href="downloads/550_Part4.zip" download>파일 다운로드</a>
         </div>
       </div>
     </div>
@@ -742,5 +879,90 @@
   본 페이지의 일정 및 세부 기준은 학사 진행 상황에 따라 변경될 수 있으며, 변경 시 별도로 안내됩니다.
 </footer>
 
+<script>
+  var DIAG_QUESTIONS = [
+    { text: "The company's new policy on remote work has received positive ______ from most employees.",
+      options: ["react", "reaction", "reactive", "reactively"], answer: 1 },
+    { text: "Each department ______ required to submit its budget report by the end of the month.",
+      options: ["are", "is", "were", "have been"], answer: 1 },
+    { text: "The manager reviewed the proposal ______ before approving the final budget.",
+      options: ["careful", "care", "carefully", "carefulness"], answer: 2 },
+    { text: "All invoices ______ carefully before payments are processed.",
+      options: ["check", "checked", "are checked", "checking"], answer: 2 },
+    { text: "The board members agreed ______ the merger proposal until next quarter.",
+      options: ["postpone", "postponing", "to postpone", "postponed"], answer: 2 }
+  ];
+  var diagIndex = 0, diagScore = 0, diagTimerId = null, diagTimeLeft = 30;
+  var LETTERS = ["A", "B", "C", "D"];
+
+  function diagStart(){
+    document.getElementById('diagIntro').style.display = 'none';
+    document.getElementById('diagQuiz').style.display = 'block';
+    diagIndex = 0; diagScore = 0;
+    diagRenderQuestion();
+  }
+
+  function diagRenderQuestion(){
+    var q = DIAG_QUESTIONS[diagIndex];
+    document.getElementById('diagQNum').textContent = diagIndex + 1;
+    document.getElementById('diagQuestion').textContent = (diagIndex + 1) + ". " + q.text;
+    var optsEl = document.getElementById('diagOptions');
+    optsEl.innerHTML = '';
+    q.options.forEach(function(opt, i){
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'diag-option';
+      btn.innerHTML = '<span class="letter">' + LETTERS[i] + '</span><span>' + opt + '</span>';
+      btn.onclick = function(){ diagAnswer(i); };
+      optsEl.appendChild(btn);
+    });
+    diagStartTimer();
+  }
+
+  function diagStartTimer(){
+    clearInterval(diagTimerId);
+    diagTimeLeft = 30;
+    document.getElementById('diagTimer').textContent = diagTimeLeft;
+    diagTimerId = setInterval(function(){
+      diagTimeLeft--;
+      document.getElementById('diagTimer').textContent = diagTimeLeft;
+      if (diagTimeLeft <= 0){
+        clearInterval(diagTimerId);
+        diagAnswer(-1);
+      }
+    }, 1000);
+  }
+
+  function diagAnswer(choiceIndex){
+    clearInterval(diagTimerId);
+    if (choiceIndex === DIAG_QUESTIONS[diagIndex].answer) diagScore++;
+    diagIndex++;
+    if (diagIndex < DIAG_QUESTIONS.length){
+      diagRenderQuestion();
+    } else {
+      diagShowResult();
+    }
+  }
+
+  function diagShowResult(){
+    document.getElementById('diagQuiz').style.display = 'none';
+    document.getElementById('diagResult').style.display = 'block';
+    document.getElementById('diagScore').textContent = diagScore;
+    var msgEl = document.getElementById('diagResultMsg');
+    if (diagScore >= DIAG_QUESTIONS.length){
+      msgEl.className = 'diag-result-msg pass';
+      msgEl.textContent = '축하합니다! 이미 탄탄한 기초 문법 실력을 갖추고 계시네요. 이 수업에서 실전 감각을 더 다져보세요.';
+    } else {
+      msgEl.className = 'diag-result-msg';
+      msgEl.textContent = '아직 기초 공부가 더 필요합니다. 이 수업을 꼭 들으면 좋겠습니다!';
+    }
+  }
+
+  function diagFinish(){
+    document.getElementById('diagOverlay').style.display = 'none';
+    document.body.style.overflow = '';
+    window.scrollTo(0, 0);
+  }
+</script>
 </body>
 </html>
